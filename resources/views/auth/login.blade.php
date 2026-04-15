@@ -125,7 +125,6 @@
 
     <div class="login-card">
         <div class="login-logo">
-            <div class="icon">👕</div>
             <div>
                 <h1>Laundry-Wit</h1>
                 <p>Sistem Manajemen Laundry</p>

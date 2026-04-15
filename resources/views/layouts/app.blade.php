@@ -271,7 +271,6 @@
     {{-- SIDEBAR --}}
     <aside class="sidebar">
         <div class="sidebar-logo">
-            <div class="logo-icon">👕</div>
             <div>
                 <div class="logo-text">Laundry-Wit</div>
                 <div class="logo-sub">Laundry Management</div>
