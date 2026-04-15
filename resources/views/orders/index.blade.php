@@ -7,7 +7,7 @@
     <div class="card-header">
         <div class="card-title">📋 Daftar Order Laundry</div>
         <a href="{{ route('orders.create') }}" class="btn btn-primary">
-            <i class="fas fa-plus"></i> Buat Order
+            Buat Order
         </a>
     </div>
 
@@ -15,7 +15,6 @@
     <form method="GET" action="{{ route('orders.index') }}" style="margin-bottom:20px;">
         <div class="search-wrap" style="flex-wrap:wrap;">
             <div class="search-input-wrap">
-                <i class="fas fa-search"></i>
                 <input type="text" name="search" class="form-control"
                     placeholder="Cari kode / nama pelanggan..." value="{{ $search ?? '' }}">
             </div>
@@ -64,17 +63,14 @@
                         <td>
                             <div style="display:flex;gap:5px;justify-content:center;">
                                 <a href="{{ route('orders.show', $o) }}" class="btn btn-success btn-sm" title="Detail">
-                                    <i class="fas fa-eye"></i>
-                                </a>
+                                    </a>
                                 <a href="{{ route('orders.edit', $o) }}" class="btn btn-info btn-sm" title="Edit">
-                                    <i class="fas fa-edit"></i>
-                                </a>
+                                    </a>
                                 <form method="POST" action="{{ route('orders.destroy', $o) }}"
                                     onsubmit="return confirm('Hapus order {{ $o->order_code }}?')">
                                     @csrf @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" title="Hapus">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                                        </button>
                                 </form>
                             </div>
                         </td>

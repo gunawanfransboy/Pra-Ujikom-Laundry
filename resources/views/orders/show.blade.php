@@ -11,10 +11,10 @@
                 <div class="card-title">📋 Informasi Order</div>
                 <div style="display:flex;gap:8px;">
                     <a href="{{ route('orders.edit', $order) }}" class="btn btn-info btn-sm">
-                        <i class="fas fa-edit"></i> Edit
+                        Edit
                     </a>
                     <a href="{{ route('orders.index') }}" class="btn btn-secondary btn-sm">
-                        <i class="fas fa-arrow-left"></i> Kembali
+                        Kembali
                     </a>
                 </div>
             </div>

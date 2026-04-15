@@ -7,7 +7,6 @@
 <div class="grid grid-3" style="margin-bottom:24px;">
     <div class="card" style="margin-bottom:0; background: linear-gradient(135deg,rgba(79,70,229,.25),rgba(79,70,229,.1)); border-color:rgba(79,70,229,.3);">
         <div style="display:flex;align-items:center;gap:16px;">
-            <div style="width:52px;height:52px;background:rgba(79,70,229,.3);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;">👥</div>
             <div>
                 <div style="font-size:28px;font-weight:800;color:#a5b4fc;">{{ $totalCustomers }}</div>
                 <div style="font-size:12px;color:#94a3b8;margin-top:2px;">Total Pelanggan</div>
@@ -16,7 +15,6 @@
     </div>
     <div class="card" style="margin-bottom:0; background: linear-gradient(135deg,rgba(6,182,212,.25),rgba(6,182,212,.1)); border-color:rgba(6,182,212,.3);">
         <div style="display:flex;align-items:center;gap:16px;">
-            <div style="width:52px;height:52px;background:rgba(6,182,212,.3);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;">📋</div>
             <div>
                 <div style="font-size:28px;font-weight:800;color:#67e8f9;">{{ $totalOrders }}</div>
                 <div style="font-size:12px;color:#94a3b8;margin-top:2px;">Total Order</div>
@@ -25,7 +23,6 @@
     </div>
     <div class="card" style="margin-bottom:0; background: linear-gradient(135deg,rgba(16,185,129,.25),rgba(16,185,129,.1)); border-color:rgba(16,185,129,.3);">
         <div style="display:flex;align-items:center;gap:16px;">
-            <div style="width:52px;height:52px;background:rgba(16,185,129,.3);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;">💰</div>
             <div>
                 <div style="font-size:22px;font-weight:800;color:#6ee7b7;">Rp {{ number_format($totalRevenue, 0, ',', '.') }}</div>
                 <div style="font-size:12px;color:#94a3b8;margin-top:2px;">Total Pendapatan</div>
@@ -88,13 +85,13 @@
     <div class="card-title" style="margin-bottom:16px;">⚡ Aksi Cepat</div>
     <div style="display:flex;gap:12px;flex-wrap:wrap;">
         <a href="{{ route('orders.create') }}" class="btn btn-primary">
-            <i class="fas fa-plus"></i> Buat Order Baru
+            Buat Order Baru
         </a>
         <a href="{{ route('customers.create') }}" class="btn btn-success">
-            <i class="fas fa-user-plus"></i> Tambah Pelanggan
+            Tambah Pelanggan
         </a>
         <a href="{{ route('services.create') }}" class="btn btn-info">
-            <i class="fas fa-plus-circle"></i> Tambah Layanan
+            Tambah Layanan
         </a>
     </div>
 </div>

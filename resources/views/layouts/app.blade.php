@@ -280,7 +280,7 @@
             <div class="nav-section">
                 <div class="nav-label">Menu Utama</div>
                 <a href="{{ route('dashboard') }}" class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                    <i class="fas fa-chart-pie"></i> Dashboard
+                    Dashboard
                 </a>
             </div>
 
@@ -288,10 +288,10 @@
             <div class="nav-section">
                 <div class="nav-label">Master Data</div>
                 <a href="{{ route('users.index') }}" class="nav-item {{ request()->routeIs('users.*') ? 'active' : '' }}">
-                    <i class="fas fa-user-shield"></i> Manajemen User
+                    Manajemen User
                 </a>
                 <a href="{{ route('services.index') }}" class="nav-item {{ request()->routeIs('services.*') ? 'active' : '' }}">
-                    <i class="fas fa-concierge-bell"></i> Jenis Layanan
+                    Jenis Layanan
                 </a>
             </div>
             @endif
@@ -300,13 +300,13 @@
             <div class="nav-section">
                 <div class="nav-label">Kemitraan</div>
                 <a href="{{ route('customers.index') }}" class="nav-item {{ request()->routeIs('customers.*') ? 'active' : '' }}">
-                    <i class="fas fa-users"></i> Data Pelanggan
+                    Data Pelanggan
                 </a>
             </div>
             <div class="nav-section">
                 <div class="nav-label">Transaksi</div>
                 <a href="{{ route('orders.index') }}" class="nav-item {{ request()->routeIs('orders.*') ? 'active' : '' }}">
-                    <i class="fas fa-clipboard-list"></i> Order Laundry
+                    Order Laundry
                 </a>
             </div>
             @endif
@@ -315,7 +315,7 @@
             <div class="nav-section">
                 <div class="nav-label">Laporan</div>
                 <a href="{{ route('report.index') }}" class="nav-item {{ request()->routeIs('report.*') ? 'active' : '' }}">
-                    <i class="fas fa-print"></i> Laporan Penjualan
+                    Laporan Penjualan
                 </a>
             </div>
             @endif
@@ -331,7 +331,7 @@
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="btn-logout">
-                    <i class="fas fa-sign-out-alt"></i> Keluar
+                    Keluar
                 </button>
             </form>
         </div>
@@ -345,7 +345,6 @@
                 <div class="topbar-breadcrumb">Laundry-Wit &rsaquo; @yield('page-title', 'Dashboard')</div>
             </div>
             <div style="font-size: 13px; color: var(--text-muted);">
-                <i class="fas fa-clock"></i>
                 {{ now()->format('d M Y, H:i') }} WIB
             </div>
         </header>
@@ -353,12 +352,12 @@
         <main class="page-content">
             @if(session('success'))
                 <div class="alert alert-success">
-                    <i class="fas fa-check-circle"></i> {{ session('success') }}
+                    {{ session('success') }}
                 </div>
             @endif
             @if(session('error'))
                 <div class="alert alert-danger">
-                    <i class="fas fa-exclamation-circle"></i> {{ session('error') }}
+                    {{ session('error') }}
                 </div>
             @endif
 

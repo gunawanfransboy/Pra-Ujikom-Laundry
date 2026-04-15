@@ -7,14 +7,13 @@
     <div class="card-header">
         <div class="card-title">👥 Daftar Pengguna Sistem</div>
         <a href="{{ route('users.create') }}" class="btn btn-primary">
-            <i class="fas fa-plus"></i> Tambah User Baru
+            Tambah User Baru
         </a>
     </div>
 
     <form method="GET" action="{{ route('users.index') }}" style="margin-bottom:20px;">
         <div class="search-wrap">
             <div class="search-input-wrap">
-                <i class="fas fa-search"></i>
                 <input type="text" name="search" class="form-control"
                     placeholder="Cari nama / email..." value="{{ $search ?? '' }}">
             </div>
@@ -63,15 +62,14 @@
                         <td>
                             <div style="display:flex;gap:6px;justify-content:center;">
                                 <a href="{{ route('users.edit', $u) }}" class="btn btn-info btn-sm">
-                                    <i class="fas fa-edit"></i> Edit
+                                    Edit
                                 </a>
                                 @if(auth()->id() !== $u->id)
                                 <form method="POST" action="{{ route('users.destroy', $u) }}"
                                     onsubmit="return confirm('Hapus user {{ $u->name }}?')">
                                     @csrf @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                                        </button>
                                 </form>
                                 @endif
                             </div>

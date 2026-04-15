@@ -140,28 +140,25 @@
             <div class="form-group">
                 <label class="form-label" for="email">Alamat Email</label>
                 <div class="input-wrap">
-                    <i class="fas fa-envelope"></i>
                     <input id="email" type="email" name="email" class="form-control"
                         placeholder="admin@laundry.com"
                         value="{{ old('email') }}" autocomplete="email" autofocus>
                 </div>
                 @error('email')
-                    <div class="error-msg"><i class="fas fa-exclamation-circle"></i> {{ $message }}</div>
+                    <div class="error-msg">{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="form-group">
                 <label class="form-label" for="password">Password</label>
                 <div class="input-wrap">
-                    <i class="fas fa-lock"></i>
                     <input id="password" type="password" name="password" class="form-control"
                         placeholder="Masukkan password" autocomplete="current-password">
                     <button type="button" class="show-pass" onclick="togglePassword()" id="eyeBtn">
-                        <i class="fas fa-eye" id="eyeIcon"></i>
-                    </button>
+                        </button>
                 </div>
                 @error('password')
-                    <div class="error-msg"><i class="fas fa-exclamation-circle"></i> {{ $message }}</div>
+                    <div class="error-msg">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -171,7 +168,7 @@
             </div>
 
             <button type="submit" class="btn-login">
-                <i class="fas fa-sign-in-alt"></i> Masuk ke Sistem
+                Masuk ke Sistem
             </button>
         </form>
 

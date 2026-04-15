@@ -7,7 +7,7 @@
     <div class="card-header">
         <div class="card-title">👥 Daftar Pelanggan</div>
         <a href="{{ route('customers.create') }}" class="btn btn-primary">
-            <i class="fas fa-user-plus"></i> Tambah Pelanggan
+            Tambah Pelanggan
         </a>
     </div>
 
@@ -15,7 +15,6 @@
     <form method="GET" action="{{ route('customers.index') }}" style="margin-bottom:20px;">
         <div class="search-wrap">
             <div class="search-input-wrap">
-                <i class="fas fa-search"></i>
                 <input type="text" name="search" class="form-control"
                     placeholder="Cari nama / nomor HP..." value="{{ $search ?? '' }}">
             </div>
@@ -50,20 +49,19 @@
                                 <span style="font-weight:600;">{{ $c->customer_name }}</span>
                             </div>
                         </td>
-                        <td><i class="fas fa-phone" style="color:#64748b;margin-right:6px;font-size:12px;"></i>{{ $c->phone }}</td>
+                        <td>{{ $c->phone }}</td>
                         <td style="max-width:200px;color:#94a3b8;font-size:13px;">{{ Str::limit($c->address, 50) }}</td>
                         <td style="color:#64748b;font-size:13px;">{{ $c->created_at->format('d M Y') }}</td>
                         <td>
                             <div style="display:flex;gap:6px;justify-content:center;">
                                 <a href="{{ route('customers.edit', $c) }}" class="btn btn-info btn-sm">
-                                    <i class="fas fa-edit"></i> Edit
+                                    Edit
                                 </a>
                                 <form method="POST" action="{{ route('customers.destroy', $c) }}"
                                     onsubmit="return confirm('Hapus pelanggan {{ $c->customer_name }}?')">
                                     @csrf @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                                        </button>
                                 </form>
                             </div>
                         </td>

@@ -7,14 +7,13 @@
     <div class="card-header">
         <div class="card-title">🛎️ Daftar Jenis Layanan</div>
         <a href="{{ route('services.create') }}" class="btn btn-primary">
-            <i class="fas fa-plus"></i> Tambah Layanan
+            Tambah Layanan
         </a>
     </div>
 
     <form method="GET" action="{{ route('services.index') }}" style="margin-bottom:20px;">
         <div class="search-wrap">
             <div class="search-input-wrap">
-                <i class="fas fa-search"></i>
                 <input type="text" name="search" class="form-control"
                     placeholder="Cari nama layanan..." value="{{ $search ?? '' }}">
             </div>
@@ -55,14 +54,13 @@
                         <td>
                             <div style="display:flex;gap:6px;justify-content:center;">
                                 <a href="{{ route('services.edit', $s) }}" class="btn btn-info btn-sm">
-                                    <i class="fas fa-edit"></i> Edit
+                                    Edit
                                 </a>
                                 <form method="POST" action="{{ route('services.destroy', $s) }}"
                                     onsubmit="return confirm('Hapus layanan {{ $s->service_name }}?')">
                                     @csrf @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                                        </button>
                                 </form>
                             </div>
                         </td>

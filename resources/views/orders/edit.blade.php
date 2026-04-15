@@ -31,7 +31,7 @@
             <div class="card-header">
                 <div class="card-title">✏️ Edit Order {{ $order->order_code }}</div>
                 <a href="{{ route('orders.show', $order) }}" class="btn btn-secondary btn-sm">
-                    <i class="fas fa-arrow-left"></i> Kembali
+                    Kembali
                 </a>
             </div>
 
@@ -77,7 +77,7 @@
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
                     <div style="font-weight:700;font-size:15px;">🧴 Detail Layanan</div>
                     <button type="button" class="btn btn-secondary btn-sm" onclick="addRow()">
-                        <i class="fas fa-plus"></i> Tambah Baris
+                        Tambah Baris
                     </button>
                 </div>
 
@@ -85,7 +85,7 @@
 
                 <div style="margin-top:20px;">
                     <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save"></i> Update Order
+                        Update Order
                     </button>
                 </div>
             </form>
@@ -140,8 +140,7 @@ function addRow(svcId = '', qty = 1, notes = '') {
             </div>
             <div style="margin-top:22px;">
                 <button type="button" class="remove-row" onclick="this.closest('.detail-line').remove();calcTotal();">
-                    <i class="fas fa-times"></i>
-                </button>
+                    </button>
             </div>
         </div>
         <div style="margin-top:8px;font-size:12px;color:#94a3b8;" class="svc-subtotal"></div>

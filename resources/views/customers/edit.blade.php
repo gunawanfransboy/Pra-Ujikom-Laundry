@@ -7,7 +7,7 @@
     <div class="card-header">
         <div class="card-title">✏️ Edit Data Pelanggan</div>
         <a href="{{ route('customers.index') }}" class="btn btn-secondary btn-sm">
-            <i class="fas fa-arrow-left"></i> Kembali
+            Kembali
         </a>
     </div>
 
@@ -36,7 +36,7 @@
 
         <div style="display:flex;gap:10px;margin-top:24px;">
             <button type="submit" class="btn btn-primary">
-                <i class="fas fa-save"></i> Update Data
+                Update Data
             </button>
             <a href="{{ route('customers.index') }}" class="btn btn-secondary">Batal</a>
         </div>

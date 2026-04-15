@@ -7,7 +7,7 @@
     <div class="card-header">
         <div class="card-title">✏️ Edit Layanan</div>
         <a href="{{ route('services.index') }}" class="btn btn-secondary btn-sm">
-            <i class="fas fa-arrow-left"></i> Kembali
+            Kembali
         </a>
     </div>
     <form method="POST" action="{{ route('services.update', $service) }}">
@@ -29,7 +29,7 @@
             <textarea name="description" class="form-control">{{ old('description', $service->description) }}</textarea>
         </div>
         <div style="display:flex;gap:10px;margin-top:24px;">
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Update</button>
+            <button type="submit" class="btn btn-primary">Update</button>
             <a href="{{ route('services.index') }}" class="btn btn-secondary">Batal</a>
         </div>
     </form>

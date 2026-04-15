@@ -20,8 +20,8 @@
                     <input type="date" name="end_date" class="form-control" value="{{ $endDate }}" style="width:160px;padding:8px 12px;">
                 </div>
                 <div style="margin-top:20px;">
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-filter"></i> Filter</button>
-                    <button type="button" class="btn btn-secondary" onclick="window.print()"><i class="fas fa-print"></i> Cetak PDF</button>
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                    <button type="button" class="btn btn-secondary" onclick="window.print()">Cetak PDF</button>
                 </div>
             </div>
         </div>

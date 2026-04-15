@@ -7,7 +7,7 @@
     <div class="card-header">
         <div class="card-title">✏️ Edit Data User</div>
         <a href="{{ route('users.index') }}" class="btn btn-secondary btn-sm">
-            <i class="fas fa-arrow-left"></i> Kembali
+            Kembali
         </a>
     </div>
 
@@ -48,7 +48,7 @@
 
         <div style="display:flex;gap:10px;margin-top:24px;">
             <button type="submit" class="btn btn-primary">
-                <i class="fas fa-save"></i> Update User
+                Update User
             </button>
             <a href="{{ route('users.index') }}" class="btn btn-secondary">Batal</a>
         </div>
