@@ -8,7 +8,7 @@
         {{-- Order Info --}}
         <div class="card">
             <div class="card-header">
-                <div class="card-title">📋 Informasi Order</div>
+                <div class="card-title">Informasi Order</div>
                 <div style="display:flex;gap:8px;">
                     <a href="{{ route('orders.edit', $order) }}" class="btn btn-info btn-sm">
                         Edit
@@ -48,7 +48,7 @@
 
             {{-- Update Status --}}
             <hr class="divider">
-            <div style="font-weight:600;font-size:14px;margin-bottom:12px;">⚡ Ubah Status Order</div>
+            <div style="font-weight:600;font-size:14px;margin-bottom:12px;">Ubah Status Order</div>
             <form method="POST" action="{{ route('orders.updateStatus', $order) }}" style="display:flex;gap:8px;flex-wrap:wrap;">
                 @csrf @method('PATCH')
                 @foreach([0 => ['Baru','warning'], 1 => ['Sudah Diambil','success']] as $val => $info)
@@ -63,7 +63,7 @@
 
         {{-- Detail Items --}}
         <div class="card">
-            <div class="card-title" style="margin-bottom:16px;">🧴 Detail Layanan</div>
+            <div class="card-title" style="margin-bottom:16px;">Detail Layanan</div>
             <div class="table-wrap">
                 <table>
                     <thead>
@@ -97,7 +97,7 @@
     {{-- Payment Summary --}}
     <div style="position:sticky;top:80px;">
         <div class="card" style="background:linear-gradient(145deg,rgba(79,70,229,.15),rgba(6,182,212,.1));border-color:rgba(79,70,229,.3);">
-            <div class="card-title" style="margin-bottom:20px;">💰 Ringkasan Pembayaran</div>
+            <div class="card-title" style="margin-bottom:20px;">Ringkasan Pembayaran</div>
 
             @foreach($order->details as $d)
             <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px;">

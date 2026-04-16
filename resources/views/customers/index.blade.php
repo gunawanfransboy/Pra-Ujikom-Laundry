@@ -5,7 +5,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <div class="card-title">👥 Daftar Pelanggan</div>
+        <div class="card-title">Daftar Pelanggan</div>
         <a href="{{ route('customers.create') }}" class="btn btn-primary">
             Tambah Pelanggan
         </a>
@@ -69,7 +69,7 @@
                 @empty
                     <tr>
                         <td colspan="6" style="text-align:center;padding:40px;color:#64748b;">
-                            <div style="font-size:36px;margin-bottom:10px;">👤</div>
+                            <div style="font-size:36px;margin-bottom:10px;"></div>
                             Belum ada data pelanggan
                         </td>
                     </tr>

@@ -5,7 +5,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <div class="card-title">🛎️ Daftar Jenis Layanan</div>
+        <div class="card-title">Daftar Jenis Layanan</div>
         <a href="{{ route('services.create') }}" class="btn btn-primary">
             Tambah Layanan
         </a>
@@ -42,7 +42,7 @@
                         <td style="color:#64748b;">{{ $services->firstItem() + $i }}</td>
                         <td>
                             <div style="display:flex;align-items:center;gap:10px;">
-                                <div style="width:34px;height:34px;border-radius:10px;background:rgba(6,182,212,.2);border:1px solid rgba(6,182,212,.3);display:flex;align-items:center;justify-content:center;font-size:16px;">🧴</div>
+                                <div style="width:34px;height:34px;border-radius:10px;background:rgba(6,182,212,.2);border:1px solid rgba(6,182,212,.3);display:flex;align-items:center;justify-content:center;font-size:16px;"></div>
                                 <span style="font-weight:600;">{{ $s->service_name }}</span>
                             </div>
                         </td>
@@ -68,7 +68,7 @@
                 @empty
                     <tr>
                         <td colspan="6" style="text-align:center;padding:40px;color:#64748b;">
-                            <div style="font-size:36px;margin-bottom:10px;">🧴</div>
+                            <div style="font-size:36px;margin-bottom:10px;"></div>
                             Belum ada jenis layanan
                         </td>
                     </tr>

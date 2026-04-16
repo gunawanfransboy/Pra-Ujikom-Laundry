@@ -5,7 +5,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <div class="card-title">📈 Laporan Penjualan (Selesai/Sudah Diambil)</div>
+        <div class="card-title">Laporan Penjualan (Selesai/Sudah Diambil)</div>
     </div>
 
     <form method="GET" action="{{ route('report.index') }}" style="margin-bottom:20px;">
@@ -67,7 +67,7 @@
                 @empty
                     <tr>
                         <td colspan="6" style="text-align:center;padding:40px;color:#64748b;">
-                            <div style="font-size:28px;margin-bottom:10px;">📉</div>
+                            <div style="font-size:28px;margin-bottom:10px;"></div>
                             Tidak ada data transaksi selesai pada periode ini
                         </td>
                     </tr>

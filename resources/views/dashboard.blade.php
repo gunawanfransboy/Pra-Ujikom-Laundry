@@ -35,18 +35,18 @@
     {{-- Order Status --}}
     <div class="card" style="margin-bottom:0;">
         <div class="card-header">
-            <div class="card-title">📊 Status Order</div>
+            <div class="card-title">Status Order</div>
         </div>
         <div style="display:grid;gap:12px;">
             <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);border-radius:10px;">
                 <div style="display:flex;align-items:center;gap:10px;font-size:14px;">
-                    <span style="color:#fbbf24;">⏳</span> Baru (Pending)
+                    <span style="color:#fbbf24;"></span> Baru (Pending)
                 </div>
                 <span class="badge badge-warning">{{ $pendingOrders }}</span>
             </div>
             <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);border-radius:10px;">
                 <div style="display:flex;align-items:center;gap:10px;font-size:14px;">
-                    <span style="color:#34d399;">✅</span> Sudah Diambil (Selesai)
+                    <span style="color:#34d399;"></span> Sudah Diambil (Selesai)
                 </div>
                 <span class="badge badge-success">{{ $doneOrders }}</span>
             </div>
@@ -56,7 +56,7 @@
     {{-- Recent Orders --}}
     <div class="card" style="margin-bottom:0;">
         <div class="card-header">
-            <div class="card-title">🕐 Order Terbaru</div>
+            <div class="card-title">Order Terbaru</div>
             <a href="{{ route('orders.index') }}" class="btn btn-secondary btn-sm">Lihat Semua</a>
         </div>
         @if($recentOrders->isEmpty())
@@ -82,7 +82,7 @@
 
 {{-- Quick Actions --}}
 <div class="card" style="margin-top:24px;">
-    <div class="card-title" style="margin-bottom:16px;">⚡ Aksi Cepat</div>
+    <div class="card-title" style="margin-bottom:16px;">Aksi Cepat</div>
     <div style="display:flex;gap:12px;flex-wrap:wrap;">
         <a href="{{ route('orders.create') }}" class="btn btn-primary">
             Buat Order Baru

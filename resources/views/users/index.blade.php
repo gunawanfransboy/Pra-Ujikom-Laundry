@@ -5,7 +5,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <div class="card-title">👥 Daftar Pengguna Sistem</div>
+        <div class="card-title">Daftar Pengguna Sistem</div>
         <a href="{{ route('users.create') }}" class="btn btn-primary">
             Tambah User Baru
         </a>
@@ -78,7 +78,7 @@
                 @empty
                     <tr>
                         <td colspan="6" style="text-align:center;padding:40px;color:#64748b;">
-                            <div style="font-size:36px;margin-bottom:10px;">🛡️</div>
+                            <div style="font-size:36px;margin-bottom:10px;"></div>
                             Belum ada data user
                         </td>
                     </tr>

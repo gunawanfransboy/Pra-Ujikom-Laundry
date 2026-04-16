@@ -34,7 +34,7 @@
     <div>
         <div class="card">
             <div class="card-header">
-                <div class="card-title">📋 Form Buat Order</div>
+                <div class="card-title">Form Buat Order</div>
                 <a href="{{ route('orders.index') }}" class="btn btn-secondary btn-sm">
                     Kembali
                 </a>
@@ -72,7 +72,7 @@
 
                 <hr class="divider">
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-                    <div style="font-weight:700;font-size:15px;">🧴 Detail Layanan</div>
+                    <div style="font-weight:700;font-size:15px;">Detail Layanan</div>
                     <button type="button" class="btn btn-secondary btn-sm" onclick="addRow()">
                         Tambah Layanan
                     </button>
@@ -94,7 +94,7 @@
     {{-- Summary panel --}}
     <div style="position:sticky;top:80px;">
         <div class="card">
-            <div class="card-title" style="margin-bottom:16px;">💰 Ringkasan Order</div>
+            <div class="card-title" style="margin-bottom:16px;">Ringkasan Order</div>
             <div id="summary-list" style="display:grid;gap:8px;margin-bottom:16px;"></div>
             <hr class="divider">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">

@@ -5,7 +5,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <div class="card-title">📋 Daftar Order Laundry</div>
+        <div class="card-title">Daftar Order Laundry</div>
         <a href="{{ route('orders.create') }}" class="btn btn-primary">
             Buat Order
         </a>
@@ -78,7 +78,7 @@
                 @empty
                     <tr>
                         <td colspan="8" style="text-align:center;padding:40px;color:#64748b;">
-                            <div style="font-size:36px;margin-bottom:10px;">📋</div>
+                            <div style="font-size:36px;margin-bottom:10px;"></div>
                             Belum ada data order
                         </td>
                     </tr>

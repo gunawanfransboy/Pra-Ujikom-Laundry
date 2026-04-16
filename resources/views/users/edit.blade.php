@@ -5,7 +5,7 @@
 @section('content')
 <div class="card" style="max-width:600px;">
     <div class="card-header">
-        <div class="card-title">✏️ Edit Data User</div>
+        <div class="card-title">Edit Data User</div>
         <a href="{{ route('users.index') }}" class="btn btn-secondary btn-sm">
             Kembali
         </a>
