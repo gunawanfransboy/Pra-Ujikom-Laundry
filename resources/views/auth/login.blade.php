@@ -172,9 +172,9 @@
             </button>
         </form>
 
-        <div class="hint">
+        <!-- <div class="hint">
             Default: admin@laundry.com / admin123
-        </div>
+        </div> -->
     </div>
 
     <script>

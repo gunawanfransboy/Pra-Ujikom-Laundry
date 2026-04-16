@@ -97,8 +97,16 @@
             <div class="card-title" style="margin-bottom:16px;">Ringkasan Order</div>
             <div id="summary-list" style="display:grid;gap:8px;margin-bottom:16px;"></div>
             <hr class="divider">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                <span style="color:#94a3b8;font-size:14px;">Subtotal</span>
+                <div id="subtotal-display" style="font-weight:600;">Rp 0</div>
+            </div>
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-                <span style="color:#94a3b8;font-size:14px;">Total</span>
+                <span style="color:#94a3b8;font-size:14px;">Pajak (10%)</span>
+                <div id="tax-display" style="font-weight:600;">Rp 0</div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+                <span style="font-weight:700;font-size:14px;">Total</span>
                 <div id="total-display">Rp 0</div>
             </div>
             <div class="form-group" style="margin-bottom:12px;">
@@ -193,10 +201,15 @@ function calcTotal() {
         }
     });
 
-    document.getElementById('total-display').textContent = 'Rp ' + grand.toLocaleString('id-ID');
+    document.getElementById('subtotal-display').textContent = 'Rp ' + grand.toLocaleString('id-ID');
+    const tax = Math.round(grand * 0.10);
+    document.getElementById('tax-display').textContent = 'Rp ' + tax.toLocaleString('id-ID');
+
+    const finalTotal = grand + tax;
+    document.getElementById('total-display').textContent = 'Rp ' + finalTotal.toLocaleString('id-ID');
 
     const pay = parseInt(document.getElementById('order_pay').value) || 0;
-    const change = Math.max(0, pay - grand);
+    const change = Math.max(0, pay - finalTotal);
     document.getElementById('change-display').textContent = 'Rp ' + change.toLocaleString('id-ID');
 
     document.getElementById('summary-list').innerHTML = summaryHtml ||

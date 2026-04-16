@@ -55,6 +55,8 @@ class TransOrderController extends Controller
             'order_date'     => $request->order_date,
             'order_end_date' => $request->order_end_date,
             'order_status'   => 0,
+            'subtotal'       => 0,
+            'tax'            => 0,
             'total'          => 0,
         ]);
 
@@ -72,10 +74,16 @@ class TransOrderController extends Controller
             ]);
         }
 
+        $subtotalOrder = $total;
+        $tax = (int) round($subtotalOrder * 0.10);
+        $total += $tax;
+
         $orderPay    = $request->order_pay ?? 0;
         $orderChange = max(0, $orderPay - $total);
 
         $order->update([
+            'subtotal'     => $subtotalOrder,
+            'tax'          => $tax,
             'total'        => $total,
             'order_pay'    => $orderPay ?: null,
             'order_change' => $orderChange ?: null,
@@ -130,6 +138,10 @@ class TransOrderController extends Controller
             ]);
         }
 
+        $subtotalOrder = $total;
+        $tax = (int) round($subtotalOrder * 0.10);
+        $total += $tax;
+
         $orderPay    = $request->order_pay ?? 0;
         $orderChange = max(0, $orderPay - $total);
 
@@ -138,6 +150,8 @@ class TransOrderController extends Controller
             'order_date'     => $request->order_date,
             'order_end_date' => $request->order_end_date,
             'order_status'   => $request->order_status,
+            'subtotal'       => $subtotalOrder,
+            'tax'            => $tax,
             'order_pay'      => $orderPay ?: null,
             'order_change'   => $orderChange ?: null,
             'total'          => $total,

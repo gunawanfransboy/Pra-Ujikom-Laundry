@@ -109,6 +109,15 @@
             <hr class="divider">
 
             <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+                <span style="color:#94a3b8;">Subtotal</span>
+                <span style="font-weight:600;">Rp {{ number_format($order->subtotal ?? 0, 0, ',', '.') }}</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+                <span style="color:#94a3b8;">Pajak (10%)</span>
+                <span style="font-weight:600;">Rp {{ number_format($order->tax ?? 0, 0, ',', '.') }}</span>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
                 <span style="font-weight:600;">Total</span>
                 <span style="font-size:22px;font-weight:800;color:#6ee7b7;font-family:monospace;">
                     Rp {{ number_format($order->total, 0, ',', '.') }}

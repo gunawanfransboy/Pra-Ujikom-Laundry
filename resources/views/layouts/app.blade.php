@@ -345,7 +345,7 @@
                 <div class="topbar-breadcrumb">Laundry-Wit &rsaquo; @yield('page-title', 'Dashboard')</div>
             </div>
             <div style="font-size: 13px; color: var(--text-muted);">
-                {{ now()->format('d M Y, H:i') }} WIB
+                {{ now()->format('d M Y') }}
             </div>
         </header>
 
