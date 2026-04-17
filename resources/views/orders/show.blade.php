@@ -43,7 +43,7 @@
                 <div class="detail-value">{{ $order->order_date->format('d M Y') }}</div>
             </div>
             <div class="detail-row">
-                <div class="detail-label">Estimasi Selesai</div>
+                <div class="detail-label">Estimasi Selesai <span style="color:#ef4444;">*</span></div>
                 <div class="detail-value">{{ $order->order_end_date ? $order->order_end_date->format('d M Y') : '-' }}</div>
             </div>
             <div class="detail-row">

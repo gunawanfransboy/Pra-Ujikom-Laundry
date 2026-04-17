@@ -92,8 +92,8 @@
                         @error('order_date')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Estimasi Selesai</label>
-                        <input type="date" name="order_end_date" class="form-control"
+                        <label class="form-label">Estimasi Selesai <span style="color:#ef4444;">*</span></label>
+                        <input type="date" name="order_end_date" class="form-control" required
                             value="{{ old('order_end_date') }}">
                     </div>
                 </div>
