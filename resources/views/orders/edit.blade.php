@@ -105,9 +105,22 @@
                 <span style="color:#94a3b8;">Pajak (10%)</span>
                 <div id="tax-display" style="font-weight:600;">Rp 0</div>
             </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div id="member-discount-row" style="display:{{ $order->discount_member > 0 ? 'flex' : 'none' }};align-items:center;justify-content:space-between;margin-bottom:8px;">
+                <span style="color:#10b981;font-size:14px;">Diskon Member (5%)</span>
+                <div id="member-discount-display" style="font-weight:600;color:#10b981;">- Rp 0</div>
+            </div>
+            <div id="voucher-discount-row" style="display:{{ $order->discount_voucher > 0 ? 'flex' : 'none' }};align-items:center;justify-content:space-between;margin-bottom:12px;">
+                <span style="color:#10b981;font-size:14px;">Diskon Voucher</span>
+                <div id="voucher-discount-display" style="font-weight:600;color:#10b981;">- Rp 0</div>
+            </div>
+            <hr class="divider">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
                 <span style="font-weight:700;">Total</span>
                 <div id="total-display">Rp 0</div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+                <span style="color:#94a3b8;font-size:14px;">Kembalian</span>
+                <div id="change-display" style="font-size:18px;font-weight:700;color:#fcd34d;">Rp 0</div>
             </div>
         </div>
     </div>
@@ -158,6 +171,9 @@ function addRow(svcId = '', qty = 1, notes = '') {
     calcTotal();
 }
 
+let hasMemberDiscount = {{ $order->discount_member > 0 ? 'true' : 'false' }};
+let voucherDiscountPerc = {{ $order->id_voucher ? (\App\Models\Voucher::find($order->id_voucher)->discount_percent ?? 0) : 0 }};
+
 function calcTotal() {
     const rows = document.querySelectorAll('.detail-line');
     let grand = 0;
@@ -178,11 +194,33 @@ function calcTotal() {
             row.querySelector('.svc-subtotal').textContent = '';
         }
     });
+    
     document.getElementById('subtotal-display').textContent = 'Rp ' + grand.toLocaleString('id-ID');
     const tax = Math.round(grand * 0.10);
     document.getElementById('tax-display').textContent = 'Rp ' + tax.toLocaleString('id-ID');
-    const finalTotal = grand + tax;
+    
+    const baseTotal = grand + tax;
+    
+    let discMemberAmt = 0;
+    if (hasMemberDiscount) {
+        discMemberAmt = Math.round(baseTotal * 0.05);
+        document.getElementById('member-discount-display').textContent = '- Rp ' + discMemberAmt.toLocaleString('id-ID');
+    }
+    
+    let discVoucherAmt = 0;
+    if (voucherDiscountPerc > 0) {
+        discVoucherAmt = Math.round(baseTotal * (voucherDiscountPerc / 100));
+        document.getElementById('voucher-discount-display').textContent = '- Rp ' + discVoucherAmt.toLocaleString('id-ID');
+    }
+    
+    const finalTotal = baseTotal - discMemberAmt - discVoucherAmt;
     document.getElementById('total-display').textContent = 'Rp ' + finalTotal.toLocaleString('id-ID');
+    
+    const payInput = document.querySelector('input[name="order_pay"]');
+    const pay = payInput ? (parseInt(payInput.value) || 0) : 0;
+    const change = Math.max(0, pay - finalTotal);
+    document.getElementById('change-display').textContent = 'Rp ' + change.toLocaleString('id-ID');
+
     document.getElementById('summary-list').innerHTML = html ||
         '<div style="color:#64748b;font-size:13px;text-align:center;">Belum ada layanan</div>';
 }

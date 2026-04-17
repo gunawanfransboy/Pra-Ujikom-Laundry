@@ -51,7 +51,12 @@
                         <td>
                             <span style="font-weight:700;color:#a5b4fc;font-family:monospace;font-size:13px;">{{ $o->order_code }}</span>
                         </td>
-                        <td style="font-weight:500;">{{ $o->customer->customer_name ?? '-' }}</td>
+                        <td style="font-weight:500;">
+                            {{ $o->customer->customer_name ?? $o->guest_name ?? '-' }}
+                            @if(!$o->id_customer && $o->guest_name)
+                                <span class="badge" style="background:#6366f1;font-size:10px;padding:2px 6px;">Guest</span>
+                            @endif
+                        </td>
                         <td style="color:#94a3b8;font-size:13px;">{{ $o->order_date->format('d M Y') }}</td>
                         <td style="color:#94a3b8;font-size:13px;">
                             {{ $o->order_end_date ? $o->order_end_date->format('d M Y') : '-' }}
@@ -63,15 +68,20 @@
                         <td>
                             <div style="display:flex;gap:5px;justify-content:center;">
                                 <a href="{{ route('orders.show', $o) }}" class="btn btn-success btn-sm" title="Detail">
+                                    <i class="fa-solid fa-eye"></i> Detail
+                                </a>
+                                @if($o->order_status == 0)
+                                    <a href="{{ route('orders.edit', $o) }}" class="btn btn-info btn-sm" title="Edit">
+                                        <i class="fa-solid fa-pen-to-square"></i> Edit
                                     </a>
-                                <a href="{{ route('orders.edit', $o) }}" class="btn btn-info btn-sm" title="Edit">
-                                    </a>
-                                <form method="POST" action="{{ route('orders.destroy', $o) }}"
-                                    onsubmit="return confirm('Hapus order {{ $o->order_code }}?')">
-                                    @csrf @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" title="Hapus">
+                                    <form method="POST" action="{{ route('orders.destroy', $o) }}"
+                                        onsubmit="return confirm('Hapus order {{ $o->order_code }}?')">
+                                        @csrf @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" title="Hapus">
+                                            <i class="fa-solid fa-trash"></i> Hapus
                                         </button>
-                                </form>
+                                    </form>
+                                @endif
                             </div>
                         </td>
                     </tr>

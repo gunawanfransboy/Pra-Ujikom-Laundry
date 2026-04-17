@@ -37,7 +37,12 @@ class TransOrderController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_customer'  => 'required|exists:customers,id',
+            'order_type'   => 'required|in:member,guest',
+            'id_customer'  => 'required_if:order_type,member|nullable|exists:customers,id',
+            'guest_name'   => 'required_if:order_type,guest|nullable|string|max:100',
+            'guest_phone'  => 'required_if:order_type,guest|nullable|string|max:20',
+            'guest_address'=> 'nullable|string',
+            'voucher_code' => 'nullable|string|exists:vouchers,voucher_code',
             'order_date'   => 'required|date',
             'order_end_date' => 'nullable|date|after_or_equal:order_date',
             'services'     => 'required|array|min:1',
@@ -47,47 +52,69 @@ class TransOrderController extends Controller
         ]);
 
         $orderCode = 'ORD-' . strtoupper(Str::random(8));
-        $total = 0;
+        $subtotalOrder = 0;
+
+        foreach ($request->services as $svc) {
+            $service  = TypeOfService::find($svc['id_service']);
+            $subtotalOrder += (int) round($service->price * ($svc['qty'] / 1000));
+        }
+
+        $tax = (int) round($subtotalOrder * 0.10);
+        $baseTotal = $subtotalOrder + $tax;
+
+        $discountMember = 0;
+        if ($request->order_type === 'member' && $request->id_customer) {
+            $isFirst = TransOrder::where('id_customer', $request->id_customer)->count() === 0;
+            if ($isFirst) {
+                $discountMember = (int) round($baseTotal * 0.05);
+            }
+        }
+
+        $discountVoucher = 0;
+        $idVoucher = null;
+        if ($request->voucher_code) {
+            $voucher = \App\Models\Voucher::where('voucher_code', $request->voucher_code)->first();
+            if ($voucher) {
+                $discountVoucher = (int) round($baseTotal * ($voucher->discount_percent / 100));
+                $idVoucher = $voucher->id;
+                // do not mark globally as used
+            }
+        }
+
+        $totalFinal = $baseTotal - $discountMember - $discountVoucher;
+        $orderPay    = $request->order_pay ?? 0;
+        $orderChange = max(0, $orderPay - $totalFinal);
 
         $order = TransOrder::create([
-            'id_customer'    => $request->id_customer,
+            'id_customer'    => $request->order_type === 'member' ? $request->id_customer : null,
+            'guest_name'     => $request->order_type === 'guest' ? $request->guest_name : null,
+            'guest_phone'    => $request->order_type === 'guest' ? $request->guest_phone : null,
+            'guest_address'  => $request->order_type === 'guest' ? $request->guest_address : null,
             'order_code'     => $orderCode,
             'order_date'     => $request->order_date,
             'order_end_date' => $request->order_end_date,
             'order_status'   => 0,
-            'subtotal'       => 0,
-            'tax'            => 0,
-            'total'          => 0,
+            'subtotal'       => $subtotalOrder,
+            'tax'            => $tax,
+            'discount_member'=> $discountMember,
+            'discount_voucher'=> $discountVoucher,
+            'id_voucher'     => $idVoucher,
+            'total'          => $totalFinal,
+            'order_pay'      => $orderPay ?: null,
+            'order_change'   => $orderChange ?: null,
         ]);
 
         foreach ($request->services as $svc) {
             $service  = TypeOfService::find($svc['id_service']);
-            $subtotal = (int) round($service->price * ($svc['qty'] / 1000));
-            $total   += $subtotal;
-
+            $svcSubtotal = (int) round($service->price * ($svc['qty'] / 1000));
             TransOrderDetail::create([
                 'id_order'   => $order->id,
                 'id_service' => $svc['id_service'],
                 'qty'        => $svc['qty'],
-                'subtotal'   => $subtotal,
+                'subtotal'   => $svcSubtotal,
                 'notes'      => $svc['notes'] ?? null,
             ]);
         }
-
-        $subtotalOrder = $total;
-        $tax = (int) round($subtotalOrder * 0.10);
-        $total += $tax;
-
-        $orderPay    = $request->order_pay ?? 0;
-        $orderChange = max(0, $orderPay - $total);
-
-        $order->update([
-            'subtotal'     => $subtotalOrder,
-            'tax'          => $tax,
-            'total'        => $total,
-            'order_pay'    => $orderPay ?: null,
-            'order_change' => $orderChange ?: null,
-        ]);
 
         return redirect()->route('orders.index')
             ->with('success', "Order {$orderCode} berhasil dibuat.");
@@ -101,6 +128,10 @@ class TransOrderController extends Controller
 
     public function edit(TransOrder $order)
     {
+        if ($order->order_status == 1) {
+            return redirect()->route('orders.show', $order)->with('error', 'Order yang sudah diambil tidak dapat diedit kembali.');
+        }
+
         $customers = Customer::orderBy('customer_name')->get();
         $services  = TypeOfService::orderBy('service_name')->get();
         $order->load('details');
@@ -109,6 +140,10 @@ class TransOrderController extends Controller
 
     public function update(Request $request, TransOrder $order)
     {
+        if ($order->order_status == 1) {
+            return redirect()->route('orders.show', $order)->with('error', 'Order yang sudah diambil tidak dapat diedit kembali.');
+        }
+
         $request->validate([
             'id_customer'   => 'required|exists:customers,id',
             'order_date'    => 'required|date',
@@ -142,8 +177,21 @@ class TransOrderController extends Controller
         $tax = (int) round($subtotalOrder * 0.10);
         $total += $tax;
 
+        $baseTotal = $subtotalOrder + $tax;
+        
+        $discountMember = $order->discount_member > 0 ? (int) round($baseTotal * 0.05) : 0;
+        
+        $discountVoucher = 0;
+        if ($order->id_voucher) {
+            $voucher = \App\Models\Voucher::find($order->id_voucher);
+            if ($voucher) {
+                $discountVoucher = (int) round($baseTotal * ($voucher->discount_percent / 100));
+            }
+        }
+
+        $totalFinal = $baseTotal - $discountMember - $discountVoucher;
         $orderPay    = $request->order_pay ?? 0;
-        $orderChange = max(0, $orderPay - $total);
+        $orderChange = max(0, $orderPay - $totalFinal);
 
         $order->update([
             'id_customer'    => $request->id_customer,
@@ -152,9 +200,11 @@ class TransOrderController extends Controller
             'order_status'   => $request->order_status,
             'subtotal'       => $subtotalOrder,
             'tax'            => $tax,
+            'discount_member'=> $discountMember,
+            'discount_voucher'=> $discountVoucher,
             'order_pay'      => $orderPay ?: null,
             'order_change'   => $orderChange ?: null,
-            'total'          => $total,
+            'total'          => $totalFinal,
         ]);
 
         return redirect()->route('orders.show', $order)
@@ -163,6 +213,10 @@ class TransOrderController extends Controller
 
     public function destroy(TransOrder $order)
     {
+        if ($order->order_status == 1) {
+            return redirect()->route('orders.index')->with('error', 'Order yang sudah diambil tidak dapat dihapus.');
+        }
+
         $order->delete();
         return redirect()->route('orders.index')
             ->with('success', 'Order berhasil dihapus.');
@@ -170,9 +224,22 @@ class TransOrderController extends Controller
 
     public function updateStatus(Request $request, TransOrder $order)
     {
+        if ($order->order_status == 1) {
+            return back()->with('error', 'Status order yang sudah diambil tidak dapat diubah kembali.');
+        }
+
         $request->validate(['order_status' => 'required|integer|between:0,1']);
         $order->update(['order_status' => $request->order_status]);
 
         return back()->with('success', 'Status order berhasil diperbarui.');
+    }
+
+    public function checkMemberFirstOrder(Customer $customer)
+    {
+        $isFirst = TransOrder::where('id_customer', $customer->id)->count() === 0;
+        return response()->json([
+            'is_first' => $isFirst,
+            'discount_percent' => $isFirst ? 5 : 0
+        ]);
     }
 }

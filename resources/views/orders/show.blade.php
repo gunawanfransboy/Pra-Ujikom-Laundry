@@ -10,9 +10,11 @@
             <div class="card-header">
                 <div class="card-title">Informasi Order</div>
                 <div style="display:flex;gap:8px;">
+                    @if($order->order_status == 0)
                     <a href="{{ route('orders.edit', $order) }}" class="btn btn-info btn-sm">
                         Edit
                     </a>
+                    @endif
                     <a href="{{ route('orders.index') }}" class="btn btn-secondary btn-sm">
                         Kembali
                     </a>
@@ -25,11 +27,16 @@
             </div>
             <div class="detail-row">
                 <div class="detail-label">Pelanggan</div>
-                <div class="detail-value" style="font-weight:600;">{{ $order->customer->customer_name ?? '-' }}</div>
+                <div class="detail-value" style="font-weight:600;">
+                    {{ $order->customer->customer_name ?? $order->guest_name ?? '-' }}
+                    @if(!$order->id_customer && $order->guest_name)
+                        <span class="badge" style="background:#6366f1;font-size:10px;padding:2px 6px;">Guest</span>
+                    @endif
+                </div>
             </div>
             <div class="detail-row">
                 <div class="detail-label">No Telepon</div>
-                <div class="detail-value">{{ $order->customer->phone ?? '-' }}</div>
+                <div class="detail-value">{{ $order->customer->phone ?? $order->guest_phone ?? '-' }}</div>
             </div>
             <div class="detail-row">
                 <div class="detail-label">Tanggal Order</div>
@@ -47,6 +54,7 @@
             </div>
 
             {{-- Update Status --}}
+            @if($order->order_status == 0)
             <hr class="divider">
             <div style="font-weight:600;font-size:14px;margin-bottom:12px;">Ubah Status Order</div>
             <form method="POST" action="{{ route('orders.updateStatus', $order) }}" style="display:flex;gap:8px;flex-wrap:wrap;">
@@ -59,6 +67,7 @@
                     </button>
                 @endforeach
             </form>
+            @endif
         </div>
 
         {{-- Detail Items --}}
@@ -116,6 +125,20 @@
                 <span style="color:#94a3b8;">Pajak (10%)</span>
                 <span style="font-weight:600;">Rp {{ number_format($order->tax ?? 0, 0, ',', '.') }}</span>
             </div>
+
+            @if($order->discount_member > 0)
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+                <span style="color:#10b981;">Diskon Member</span>
+                <span style="font-weight:600;color:#10b981;">- Rp {{ number_format($order->discount_member, 0, ',', '.') }}</span>
+            </div>
+            @endif
+
+            @if($order->discount_voucher > 0)
+            <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+                <span style="color:#10b981;">Diskon Voucher</span>
+                <span style="font-weight:600;color:#10b981;">- Rp {{ number_format($order->discount_voucher, 0, ',', '.') }}</span>
+            </div>
+            @endif
 
             <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
                 <span style="font-weight:600;">Total</span>

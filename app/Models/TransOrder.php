@@ -12,7 +12,8 @@ class TransOrder extends Model
     protected $table = 'trans_order';
     protected $fillable = [
         'id_customer', 'order_code', 'order_date', 'order_end_date',
-        'order_status', 'subtotal', 'tax', 'order_pay', 'order_change', 'total'
+        'order_status', 'subtotal', 'tax', 'order_pay', 'order_change', 'total',
+        'guest_name', 'guest_phone', 'guest_address', 'discount_member', 'discount_voucher', 'id_voucher'
     ];
 
     protected $casts = [

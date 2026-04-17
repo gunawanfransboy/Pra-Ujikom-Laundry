@@ -24,13 +24,22 @@ Route::middleware('auth')->group(function () {
     Route::middleware('role:admin')->group(function () {
         Route::resource('users', UserController::class)->except(['show']);
         Route::resource('services', TypeOfServiceController::class)->parameters(['services' => 'service'])->except(['show']);
+        
+        // Vouchers fully managed by Admin
+        Route::resource('vouchers', \App\Http\Controllers\VoucherController::class)->except(['show']);
     });
 
-    // Operator Routes
-    Route::middleware('role:operator,admin')->group(function () {
-        Route::resource('customers', CustomerController::class)->except(['show']);
+    // Operator & Admin Routes (Also Pimpinan for some)
+    Route::middleware('role:operator,admin,pimpinan')->group(function () {
         Route::resource('orders', TransOrderController::class);
         Route::patch('/orders/{order}/status', [TransOrderController::class, 'updateStatus'])->name('orders.updateStatus');
+        Route::get('/api/check-member-first-order/{customer}', [TransOrderController::class, 'checkMemberFirstOrder'])->name('orders.checkMember');
+    });
+
+    Route::middleware('role:operator,admin')->group(function () {
+        Route::resource('customers', CustomerController::class)->except(['show']);
+        // API Check Voucher accessible by operator during order creation
+        Route::post('/api/check-voucher', [\App\Http\Controllers\VoucherController::class, 'checkVoucher'])->name('vouchers.check');
     });
 
     // Pimpinan Routes
