@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
     // Operator & Admin Routes (Also Pimpinan for some)
     Route::middleware('role:operator,admin,pimpinan')->group(function () {
         Route::resource('orders', TransOrderController::class);
+        Route::get('/orders/{order}/print', [TransOrderController::class, 'print'])->name('orders.print');
         Route::patch('/orders/{order}/status', [TransOrderController::class, 'updateStatus'])->name('orders.updateStatus');
         Route::get('/api/check-member-first-order/{customer}', [TransOrderController::class, 'checkMemberFirstOrder'])->name('orders.checkMember');
     });

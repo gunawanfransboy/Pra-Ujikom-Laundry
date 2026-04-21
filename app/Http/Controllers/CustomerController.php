@@ -28,8 +28,10 @@ class CustomerController extends Controller
     {
         $request->validate([
             'customer_name' => 'required|string|max:50',
-            'phone'         => 'required|string|max:13',
+            'phone'         => 'required|regex:/^[0-9]+$/|max:13',
             'address'       => 'required|string',
+        ], [
+            'phone.regex' => 'Nomor telepon harus berupa angka.',
         ]);
 
         Customer::create($request->only('customer_name', 'phone', 'address'));
@@ -47,8 +49,10 @@ class CustomerController extends Controller
     {
         $request->validate([
             'customer_name' => 'required|string|max:50',
-            'phone'         => 'required|string|max:13',
+            'phone'         => 'required|regex:/^[0-9]+$/|max:13',
             'address'       => 'required|string',
+        ], [
+            'phone.regex' => 'Nomor telepon harus berupa angka.',
         ]);
 
         $customer->update($request->only('customer_name', 'phone', 'address'));

@@ -70,6 +70,9 @@
                                 <a href="{{ route('orders.show', $o) }}" class="btn btn-success btn-sm" title="Detail">
                                     <i class="fa-solid fa-eye"></i> Detail
                                 </a>
+                                <a href="{{ route('orders.print', $o) }}" target="_blank" class="btn btn-secondary btn-sm" title="Cetak Struk">
+                                    <i class="fa-solid fa-print"></i>
+                                </a>
                                 @if($o->order_status == 0)
                                     <a href="{{ route('orders.edit', $o) }}" class="btn btn-info btn-sm" title="Edit">
                                         <i class="fa-solid fa-pen-to-square"></i> Edit

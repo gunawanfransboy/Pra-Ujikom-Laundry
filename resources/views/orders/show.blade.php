@@ -15,6 +15,9 @@
                         Edit
                     </a>
                     @endif
+                    <a href="{{ route('orders.print', $order) }}" target="_blank" class="btn btn-primary btn-sm">
+                        Cetak Struk
+                    </a>
                     <a href="{{ route('orders.index') }}" class="btn btn-secondary btn-sm">
                         Kembali
                     </a>
@@ -116,33 +119,6 @@
             @endforeach
 
             <hr class="divider">
-
-            <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
-                <span style="color:#94a3b8;">Subtotal</span>
-                <span style="font-weight:600;">Rp {{ number_format($order->subtotal ?? 0, 0, ',', '.') }}</span>
-            </div>
-            {{-- 
-            <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
-                <span style="color:#94a3b8;">Pajak (10%)</span>
-                <span style="font-weight:600;">Rp {{ number_format($order->tax ?? 0, 0, ',', '.') }}</span>
-            </div>
-            --}}
-
-            {{-- 
-            @if($order->discount_member > 0)
-            <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
-                <span style="color:#10b981;">Diskon Member</span>
-                <span style="font-weight:600;color:#10b981;">- Rp {{ number_format($order->discount_member, 0, ',', '.') }}</span>
-            </div>
-            @endif
-
-            @if($order->discount_voucher > 0)
-            <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
-                <span style="color:#10b981;">Diskon Voucher</span>
-                <span style="font-weight:600;color:#10b981;">- Rp {{ number_format($order->discount_voucher, 0, ',', '.') }}</span>
-            </div>
-            @endif
-            --}}
 
             <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
                 <span style="font-weight:600;">Total</span>

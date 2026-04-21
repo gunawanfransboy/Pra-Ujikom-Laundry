@@ -23,7 +23,8 @@
         <div class="form-group">
             <label class="form-label">No Telepon <span style="color:#ef4444;">*</span></label>
             <input type="text" name="phone" class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}"
-                value="{{ old('phone') }}" placeholder="Contoh: 08123456789" maxlength="13">
+                value="{{ old('phone') }}" placeholder="Contoh: 08123456789" maxlength="13" 
+                oninput="this.value = this.value.replace(/[^0-9]/g, '');">
             @error('phone')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
 

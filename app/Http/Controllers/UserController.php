@@ -25,17 +25,19 @@ class UserController extends Controller
 
     public function create()
     {
-        $levels = Level::all();
+        $levels = Level::whereIn('id', [2, 3])->get();
         return view('users.create', compact('levels'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'id_level' => 'required|exists:levels,id',
+            'id_level' => 'required|in:2,3',
             'name'     => 'required|string|max:255',
             'email'    => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
+        ], [
+            'id_level.in' => 'Level yang diperbolehkan hanya Operator atau Pimpinan.',
         ]);
 
         User::create([
@@ -51,17 +53,27 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        $levels = Level::all();
+        $levels = Level::whereIn('id', [2, 3])
+            ->when($user->id_level == 1, fn($q) => $q->orWhere('id', 1))
+            ->get();
+
         return view('users.edit', compact('user', 'levels'));
     }
 
     public function update(Request $request, User $user)
     {
+        $allowedLevels = [2, 3];
+        if ($user->id_level == 1) {
+            $allowedLevels[] = 1;
+        }
+
         $request->validate([
-            'id_level' => 'required|exists:levels,id',
+            'id_level' => ['required', Rule::in($allowedLevels)],
             'name'     => 'required|string|max:255',
             'email'    => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'password' => 'nullable|string|min:6',
+        ], [
+            'id_level.in' => 'Level yang diperbolehkan hanya Operator atau Pimpinan.',
         ]);
 
         $data = [

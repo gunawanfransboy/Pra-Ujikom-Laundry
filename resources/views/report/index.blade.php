@@ -42,48 +42,109 @@
         </div>
     </div>
 
-    <div class="table-wrap print-area">
-        <table>
+    <div class="table-wrap">
+        <div class="print-header" style="display:none; text-align:center; margin-bottom:20px; border-bottom:2px solid #000; padding-bottom:10px;">
+            <h2 style="margin:0; text-transform:uppercase;">Gunawan's Laundry</h2>
+            <p style="margin:5px 0 0; font-size:14px; font-weight:600;">Laporan Penjualan Laundry</p>
+            <p style="margin:2px 0 0; font-size:12px;">Periode: {{ date('d/m/Y', strtotime($startDate)) }} - {{ date('d/m/Y', strtotime($endDate)) }}</p>
+        </div>
+        
+        <table class="report-table">
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>Kode Order</th>
+                    <th style="width:40px;">No</th>
                     <th>Pelanggan</th>
-                    <th>Tgl Transaksi</th>
-                    <th>Tgl Diambil</th>
+                    <th>Jenis Layanan</th>
+                    <th style="text-align:center; width:80px;">Berat (g)</th>
+                    <th style="text-align:right;">Harga Satuan</th>
                     <th style="text-align:right;">Subtotal</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse($orders as $i => $o)
-                    <tr>
-                        <td style="color:#64748b;">{{ $i + 1 }}</td>
-                        <td><span style="font-weight:700;color:#a5b4fc;font-family:monospace;">{{ $o->order_code }}</span></td>
-                        <td>{{ $o->customer->customer_name ?? '-' }}</td>
-                        <td style="color:#94a3b8;font-size:13px;">{{ $o->order_date->format('d M Y') }}</td>
-                        <td style="color:#94a3b8;font-size:13px;">{{ $o->updated_at->format('d M Y') }}</td>
-                        <td style="text-align:right;font-weight:600;color:#6ee7b7;">Rp {{ number_format($o->total, 0, ',', '.') }}</td>
-                    </tr>
+                @php $no = 1; @endphp
+                @forelse($orders as $o)
+                    @foreach($o->details as $d)
+                        <tr>
+                            <td>{{ $no++ }}</td>
+                            <td style="word-break:break-all;">{{ $o->customer->customer_name ?? $o->guest_name ?? '-' }}</td>
+                            <td>{{ $d->service->service_name ?? '-' }}</td>
+                            <td style="text-align:center;">{{ number_format($d->qty, 0, ',', '.') }}</td>
+                            <td style="text-align:right;">Rp {{ number_format($d->service->price ?? 0, 0, ',', '.') }}/kg</td>
+                            <td style="text-align:right; font-weight:700;">Rp {{ number_format($d->subtotal, 0, ',', '.') }}</td>
+                        </tr>
+                    @endforeach
                 @empty
                     <tr>
                         <td colspan="6" style="text-align:center;padding:40px;color:#64748b;">
-                            <div style="font-size:28px;margin-bottom:10px;"></div>
                             Tidak ada data transaksi selesai pada periode ini
                         </td>
                     </tr>
                 @endforelse
             </tbody>
+            @if($orders->count() > 0)
+            <tfoot>
+                <tr style="border-top:2px solid #000;">
+                    <th colspan="5" style="text-align:right; padding:12px;">Total Pendapatan:</th>
+                    <th style="text-align:right; padding:12px; font-size:16px;">Rp {{ number_format($totalRevenue, 0, ',', '.') }}</th>
+                </tr>
+            </tfoot>
+            @endif
         </table>
     </div>
 </div>
 
 <style>
 @media print {
-    body * { visibility: hidden; }
-    .print-area, .print-area * { visibility: visible; }
-    .print-area { position: absolute; left: 0; top: 0; width: 100%; }
-    .card { border: none; box-shadow: none; }
-    .search-wrap, .btn { display: none; }
+    @page {
+        size: portrait;
+        margin: 1cm;
+    }
+    body {
+        background: #fff !important;
+        color: #000 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .sidebar, .topbar, .search-wrap, .grid, .btn, .card-header .btn {
+        display: none !important;
+    }
+    .main-wrap {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .page-content {
+        padding: 0 !important;
+    }
+    .card {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .card-header {
+        display: none !important;
+    }
+    .print-header {
+        display: block !important;
+    }
+    .table-wrap {
+        overflow: visible !important;
+    }
+    table {
+        width: 100% !important;
+        border: 1px solid #000 !important;
+        table-layout: auto !important;
+    }
+    th, td {
+        border: 1px solid #000 !important;
+        padding: 8px 6px !important;
+        font-size: 11px !important;
+        color: #000 !important;
+    }
+    th {
+        background: #eee !important;
+        -webkit-print-color-adjust: exact;
+    }
 }
 </style>
 @endsection

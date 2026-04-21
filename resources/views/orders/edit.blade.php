@@ -64,6 +64,7 @@
                     <div class="form-group">
                         <label class="form-label">Estimasi Selesai</label>
                         <input type="date" name="order_end_date" class="form-control"
+                            min="{{ date('Y-m-d') }}"
                             value="{{ old('order_end_date', $order->order_end_date ? $order->order_end_date->format('Y-m-d') : '') }}">
                     </div>
                     <div class="form-group">
@@ -97,24 +98,6 @@
             <div class="card-title" style="margin-bottom:16px;">Ringkasan</div>
             <div id="summary-list" style="display:grid;gap:8px;margin-bottom:16px;"></div>
             <hr class="divider">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-                <span style="color:#94a3b8;">Subtotal</span>
-                <div id="subtotal-display" style="font-weight:600;">Rp 0</div>
-            </div>
-            {{-- 
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-                <span style="color:#94a3b8;">Pajak (10%)</span>
-                <div id="tax-display" style="font-weight:600;">Rp 0</div>
-            </div>
-            <div id="member-discount-row" style="display:{{ $order->discount_member > 0 ? 'flex' : 'none' }};align-items:center;justify-content:space-between;margin-bottom:8px;">
-                <span style="color:#10b981;font-size:14px;">Diskon Member (5%)</span>
-                <div id="member-discount-display" style="font-weight:600;color:#10b981;">- Rp 0</div>
-            </div>
-            <div id="voucher-discount-row" style="display:{{ $order->discount_voucher > 0 ? 'flex' : 'none' }};align-items:center;justify-content:space-between;margin-bottom:12px;">
-                <span style="color:#10b981;font-size:14px;">Diskon Voucher</span>
-                <div id="voucher-discount-display" style="font-weight:600;color:#10b981;">- Rp 0</div>
-            </div>
-            --}}
             <hr class="divider">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
                 <span style="font-weight:700;">Total</span>
@@ -173,8 +156,6 @@ function addRow(svcId = '', qty = 1, notes = '') {
     calcTotal();
 }
 
-let hasMemberDiscount = {{ $order->discount_member > 0 ? 'true' : 'false' }};
-let voucherDiscountPerc = {{ $order->id_voucher ? (\App\Models\Voucher::find($order->id_voucher)->discount_percent ?? 0) : 0 }};
 
 function calcTotal() {
     const rows = document.querySelectorAll('.detail-line');
@@ -197,29 +178,6 @@ function calcTotal() {
         }
     });
     
-    document.getElementById('subtotal-display').textContent = 'Rp ' + grand.toLocaleString('id-ID');
-    
-    /*
-    const tax = Math.round(grand * 0.10);
-    document.getElementById('tax-display').textContent = 'Rp ' + tax.toLocaleString('id-ID');
-    
-    const baseTotal = grand + tax;
-    
-    let discMemberAmt = 0;
-    if (hasMemberDiscount) {
-        discMemberAmt = Math.round(baseTotal * 0.05);
-        document.getElementById('member-discount-display').textContent = '- Rp ' + discMemberAmt.toLocaleString('id-ID');
-    }
-    
-    let discVoucherAmt = 0;
-    if (voucherDiscountPerc > 0) {
-        discVoucherAmt = Math.round(baseTotal * (voucherDiscountPerc / 100));
-        document.getElementById('voucher-discount-display').textContent = '- Rp ' + discVoucherAmt.toLocaleString('id-ID');
-    }
-    
-    const finalTotal = baseTotal - discMemberAmt - discVoucherAmt;
-    */
-
     const finalTotal = grand;
     document.getElementById('total-display').textContent = 'Rp ' + finalTotal.toLocaleString('id-ID');
     

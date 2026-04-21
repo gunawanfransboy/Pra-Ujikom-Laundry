@@ -13,7 +13,7 @@ class ReportController extends Controller
         $endDate   = $request->get('end_date', now()->endOfMonth()->format('Y-m-d'));
 
         // Transaksi yang statusnya "Sudah Diambil" (1) dianggap selesai dan masuk laporan penjualan
-        $query = TransOrder::with(['customer', 'details'])
+        $query = TransOrder::with(['customer', 'details.service'])
             ->where('order_status', 1)
             ->whereBetween('order_date', [$startDate, $endDate])
             ->orderBy('order_date', 'asc');

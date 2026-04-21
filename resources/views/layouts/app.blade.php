@@ -294,15 +294,6 @@
                     Jenis Layanan
                 </a>
             </div>
-            
-            {{-- 
-            <div class="nav-section">
-                <div class="nav-label">Voucher</div>
-                <a href="{{ route('vouchers.index') }}" class="nav-item {{ request()->routeIs('vouchers.*') ? 'active' : '' }}">
-                    Kelola Voucher
-                </a>
-            </div>
-            --}}
             @endif
 
             @if(in_array(auth()->user()->id_level, [1, 2])) {{-- Admin & Operator --}}
@@ -314,7 +305,7 @@
             </div>
             @endif
             
-            @if(in_array(auth()->user()->id_level, [1, 2, 3])) {{-- Admin, Operator, Pimpinan --}}
+            @if(in_array(auth()->user()->id_level, [2])) {{-- Operator --}}
             <div class="nav-section">
                 <div class="nav-label">Transaksi</div>
                 <a href="{{ route('orders.index') }}" class="nav-item {{ request()->routeIs('orders.*') ? 'active' : '' }}">
@@ -323,7 +314,7 @@
             </div>
             @endif
 
-            @if(in_array(auth()->user()->id_level, [1, 3])) {{-- Admin & Pimpinan --}}
+            @if(in_array(auth()->user()->id_level, [3])) {{-- Pimpinan --}}
             <div class="nav-section">
                 <div class="nav-label">Laporan</div>
                 <a href="{{ route('report.index') }}" class="nav-item {{ request()->routeIs('report.*') ? 'active' : '' }}">
