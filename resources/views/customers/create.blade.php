@@ -5,7 +5,7 @@
 @section('content')
 <div class="card" style="max-width:600px;">
     <div class="card-header">
-        <div class="card-title">Form Tambah Pelanggan</div>
+        <div class="card-title">Tambah Pelanggan</div>
         <a href="{{ route('customers.index') }}" class="btn btn-secondary btn-sm">
             Kembali
         </a>

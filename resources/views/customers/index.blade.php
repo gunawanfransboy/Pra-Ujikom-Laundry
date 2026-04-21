@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('title', 'Data Pelanggan')
 @section('page-title', 'Data Pelanggan')
-
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+</head>
 @section('content')
 <div class="card">
     <div class="card-header">
@@ -29,7 +31,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th>No</th>
                     <th>Nama Pelanggan</th>
                     <th>No Telepon</th>
                     <th>Alamat</th>
@@ -55,13 +57,14 @@
                         <td>
                             <div style="display:flex;gap:6px;justify-content:center;">
                                 <a href="{{ route('customers.edit', $c) }}" class="btn btn-info btn-sm">
-                                    Edit
+                                    <i class="bi bi-pencil-fill"></i> Edit
                                 </a>
                                 <form method="POST" action="{{ route('customers.destroy', $c) }}"
                                     onsubmit="return confirm('Hapus pelanggan {{ $c->customer_name }}?')">
                                     @csrf @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">
-                                        </button>
+                                        <i class="bi bi-trash-fill"></i> Hapus
+                                    </button>
                                 </form>
                             </div>
                         </td>

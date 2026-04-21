@@ -1,20 +1,20 @@
-# Web Gunawan Laundry 🧺
+# Web Gunawan Laundry 
 
 Aplikasi Manajemen Laundry (Point of Sales) yang dibangun menggunakan framework **Laravel**. Aplikasi ini dirancang untuk mempermudah operasional bisnis laundry mulai dari pencatatan pesanan (transaksi), hingga manajemen hak akses pengguna (pegawai).
 
-## 🚀 Fitur Utama
+## Fitur Utama
 - **Autentikasi Pengguna**: Sistem Login yang aman untuk pegawai.
 - **Manajemen Hak Akses (Level/Role)**: Pembedaan akses aplikasi berdasarkan level pengguna (contoh: Admin, Kasir, Owner).
 - **Dashboard**: Ringkasan data operasional laundry.
 - **Manajemen Transaksi (Order)**: Pencatatan, pembuatan pesanan cucian baru, dan manajemen detail transaksi pelanggan.
 
-## 🛠️ Persyaratan Sistem
+## Persyaratan Sistem
 - PHP >= 8.1
 - Composer
 - Node.js & NPM
 - Database MySQL/MariaDB
 
-## 📦 Instalasi & Persiapan
+## Instalasi & Persiapan
 
 1. Buka terminal/command prompt dan arahkan ke direktori project.
 2. **Install Dependensi PHP & Frontend**:
@@ -39,7 +39,7 @@ Aplikasi Manajemen Laundry (Point of Sales) yang dibangun menggunakan framework 
    php artisan migrate --seed
    ```
 
-## 📖 Alur Penggunaan Aplikasi (Cara Pakai)
+## Alur Penggunaan Aplikasi (Cara Pakai)
 
 1. **Jalankan Aplikasi:**
    Buka terminal di folder project, dan jalankan local server:

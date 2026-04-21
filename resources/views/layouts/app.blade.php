@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Laundry-Wit - Sistem Manajemen Laundry Professional">
-    <title>@yield('title', 'Dashboard') - Laundry-Wit</title>
+    <meta name="description" content="Gunawan's Laundry - Sistem Manajemen Laundry Professional">
+    <title>@yield('title', 'Dashboard') - Gunawan's Laundry</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -19,13 +19,13 @@
             --warning: #f59e0b;
             --danger: #ef4444;
             --info: #3b82f6;
-            --dark: #0f172a;
-            --dark2: #1e293b;
-            --dark3: #334155;
-            --text: #e2e8f0;
-            --text-muted: #94a3b8;
-            --border: #334155;
-            --card: #1e293b;
+            --dark: #f8fafc;
+            --dark2: #ffffff;
+            --dark3: #f1f5f9;
+            --text: #111827;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --card: #ffffff;
             --sidebar-w: 260px;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -81,13 +81,13 @@
             margin-bottom: 2px;
         }
         .nav-item:hover {
-            background: rgba(79,70,229,.15);
-            color: var(--primary-light);
+            background: #f1f5f9;
+            color: var(--primary);
         }
         .nav-item.active {
-            background: linear-gradient(135deg, rgba(79,70,229,.3), rgba(6,182,212,.15));
-            color: #fff;
-            box-shadow: 0 0 0 1px rgba(79,70,229,.3);
+            background: #eff6ff;
+            color: var(--primary);
+            font-weight: 600;
         }
         .nav-item i { width: 20px; text-align: center; font-size: 15px; }
         .sidebar-footer {
@@ -97,7 +97,7 @@
         .user-info {
             display: flex; align-items: center; gap: 10px;
             padding: 10px 12px; border-radius: 10px;
-            background: rgba(255,255,255,.05);
+            background: var(--dark3);
             margin-bottom: 8px;
         }
         .user-avatar {
@@ -128,7 +128,7 @@
         }
         .topbar {
             height: 64px;
-            background: rgba(30,41,59,.8);
+            background: rgba(255,255,255,.8);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
             display: flex; align-items: center; justify-content: space-between;
@@ -154,9 +154,9 @@
             margin-bottom: 16px; font-size: 14px;
             display: flex; align-items: center; gap: 10px;
         }
-        .alert-success { background: rgba(16,185,129,.15); border: 1px solid rgba(16,185,129,.3); color: #6ee7b7; }
-        .alert-danger  { background: rgba(239,68,68,.15);  border: 1px solid rgba(239,68,68,.3);  color: #fca5a5; }
-        .alert-warning { background: rgba(245,158,11,.15); border: 1px solid rgba(245,158,11,.3); color: #fcd34d; }
+        .alert-success { background: #ecfdf5; border: 1px solid #10b98133; color: #065f46; }
+        .alert-danger  { background: #fef2f2; border: 1px solid #ef444433; color: #991b1b; }
+        .alert-warning { background: #fffbeb; border: 1px solid #f59e0b33; color: #92400e; }
         /* ---- TABLE ---- */
         .table-wrap { overflow-x: auto; border-radius: 12px; }
         table { width: 100%; border-collapse: collapse; }
@@ -181,12 +181,12 @@
             padding: 4px 10px; border-radius: 20px;
             font-size: 11px; font-weight: 600;
         }
-        .badge-success  { background: rgba(16,185,129,.2); color: #34d399; }
-        .badge-warning  { background: rgba(245,158,11,.2); color: #fbbf24; }
-        .badge-info     { background: rgba(59,130,246,.2); color: #60a5fa; }
-        .badge-primary  { background: rgba(79,70,229,.2);  color: #a5b4fc; }
-        .badge-danger   { background: rgba(239,68,68,.2);  color: #f87171; }
-        .badge-secondary{ background: rgba(148,163,184,.2);color: #cbd5e1; }
+        .badge-success  { background: #dcfce7; color: #166534; }
+        .badge-warning  { background: #fef3c7; color: #92400e; }
+        .badge-info     { background: #dbeafe; color: #1e40af; }
+        .badge-primary  { background: #e0e7ff; color: #3730a3; }
+        .badge-danger   { background: #fee2e2; color: #991b1b; }
+        .badge-secondary{ background: #f1f5f9; color: #475569; }
         /* ---- BUTTONS ---- */
         .btn {
             display: inline-flex; align-items: center; gap: 6px;
@@ -201,19 +201,19 @@
             box-shadow: 0 4px 12px rgba(79,70,229,.3);
         }
         .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(79,70,229,.4); }
-        .btn-secondary { background: rgba(255,255,255,.07); color: var(--text-muted); border: 1px solid var(--border); }
-        .btn-secondary:hover { background: rgba(255,255,255,.12); color: var(--text); }
-        .btn-success { background: rgba(16,185,129,.2); color: #34d399; border: 1px solid rgba(16,185,129,.3); }
-        .btn-danger  { background: rgba(239,68,68,.15); color: #f87171; border: 1px solid rgba(239,68,68,.2); }
-        .btn-warning { background: rgba(245,158,11,.15); color: #fbbf24; border: 1px solid rgba(245,158,11,.2); }
-        .btn-info    { background: rgba(59,130,246,.15); color: #60a5fa; border: 1px solid rgba(59,130,246,.2); }
+        .btn-secondary { background: #ffffff; color: var(--text-muted); border: 1px solid var(--border); }
+        .btn-secondary:hover { background: #f8fafc; color: var(--text); }
+        .btn-success { background: #dcfce7; color: #166534; border: 1px solid #10b981; }
+        .btn-danger  { background: #fee2e2; color: #991b1b; border: 1px solid #ef4444; }
+        .btn-warning { background: #fef3c7; color: #92400e; border: 1px solid #f59e0b; }
+        .btn-info    { background: #dbeafe; color: #1e40af; border: 1px solid #3b82f6; }
         .btn-sm { padding: 5px 10px; font-size: 12px; border-radius: 6px; }
         /* ---- FORMS ---- */
         .form-group { margin-bottom: 20px; }
         .form-label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
         .form-control {
             width: 100%; padding: 10px 14px;
-            background: rgba(255,255,255,.05);
+            background: #ffffff;
             border: 1px solid var(--border);
             border-radius: 10px; color: var(--text);
             font-size: 14px; font-family: inherit;
@@ -272,7 +272,7 @@
     <aside class="sidebar">
         <div class="sidebar-logo">
             <div>
-                <div class="logo-text">Laundry-Wit</div>
+                <div class="logo-text">Gunawan's Laundry</div>
                 <div class="logo-sub">Laundry Management</div>
             </div>
         </div>
@@ -295,12 +295,14 @@
                 </a>
             </div>
             
+            {{-- 
             <div class="nav-section">
                 <div class="nav-label">Voucher</div>
                 <a href="{{ route('vouchers.index') }}" class="nav-item {{ request()->routeIs('vouchers.*') ? 'active' : '' }}">
                     Kelola Voucher
                 </a>
             </div>
+            --}}
             @endif
 
             @if(in_array(auth()->user()->id_level, [1, 2])) {{-- Admin & Operator --}}
@@ -352,7 +354,7 @@
         <header class="topbar">
             <div>
                 <div class="topbar-title">@yield('page-title', 'Dashboard')</div>
-                <div class="topbar-breadcrumb">Laundry-Wit &rsaquo; @yield('page-title', 'Dashboard')</div>
+                <div class="topbar-breadcrumb">Gunawan's Laundry &rsaquo; @yield('page-title', 'Dashboard')</div>
             </div>
             <div style="font-size: 13px; color: var(--text-muted);">
                 {{ now()->format('d M Y') }}

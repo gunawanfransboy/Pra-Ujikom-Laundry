@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('type_of_service', function (Blueprint $table) {
-            $table->id();
-            $table->string('service_name', 50);
-            $table->integer('price');
-            $table->text('description')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::create('type_of_service', function (Blueprint $col) {
+            $col->id();
+            $col->string('service_name');
+            $col->double('price');
+            $col->text('description')->nullable();
+            $col->timestamps();
+            $col->softDeletes();
         });
     }
 

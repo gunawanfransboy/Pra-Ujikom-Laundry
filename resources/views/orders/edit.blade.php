@@ -101,6 +101,7 @@
                 <span style="color:#94a3b8;">Subtotal</span>
                 <div id="subtotal-display" style="font-weight:600;">Rp 0</div>
             </div>
+            {{-- 
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
                 <span style="color:#94a3b8;">Pajak (10%)</span>
                 <div id="tax-display" style="font-weight:600;">Rp 0</div>
@@ -113,6 +114,7 @@
                 <span style="color:#10b981;font-size:14px;">Diskon Voucher</span>
                 <div id="voucher-discount-display" style="font-weight:600;color:#10b981;">- Rp 0</div>
             </div>
+            --}}
             <hr class="divider">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
                 <span style="font-weight:700;">Total</span>
@@ -196,6 +198,8 @@ function calcTotal() {
     });
     
     document.getElementById('subtotal-display').textContent = 'Rp ' + grand.toLocaleString('id-ID');
+    
+    /*
     const tax = Math.round(grand * 0.10);
     document.getElementById('tax-display').textContent = 'Rp ' + tax.toLocaleString('id-ID');
     
@@ -214,6 +218,9 @@ function calcTotal() {
     }
     
     const finalTotal = baseTotal - discMemberAmt - discVoucherAmt;
+    */
+
+    const finalTotal = grand;
     document.getElementById('total-display').textContent = 'Rp ' + finalTotal.toLocaleString('id-ID');
     
     const payInput = document.querySelector('input[name="order_pay"]');

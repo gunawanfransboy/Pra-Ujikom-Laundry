@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('trans_order', function (Blueprint $table) {
-            $table->integer('subtotal')->default(0)->after('order_status');
-            $table->integer('tax')->default(0)->after('subtotal');
+        Schema::create('levels', function (Blueprint $col) {
+            $col->id();
+            $col->string('level_name');
+            $col->timestamps();
+            $col->softDeletes();
         });
     }
 
@@ -22,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('trans_order', function (Blueprint $table) {
-            $table->dropColumn(['subtotal', 'tax']);
-        });
+        Schema::dropIfExists('levels');
     }
 };

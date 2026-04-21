@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('title', 'Data Voucher')
 @section('page-title', 'Kelola Voucher')
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
 
 @section('content')
 <div class="card">
@@ -48,12 +52,12 @@
                     </td>
                     <td>{{ $voucher->created_at->format('d M Y H:i') }}</td>
                     <td>
-                        <a href="{{ route('vouchers.edit', $voucher) }}" class="btn btn-info btn-sm">Edit</a>
+                        <a href="{{ route('vouchers.edit', $voucher) }}" class="btn btn-info btn-sm"><i class="bi bi-pencil-fill"></i> Edit</a>
                         <form action="{{ route('vouchers.destroy', $voucher) }}" method="POST" style="display:inline-block;"
                               onsubmit="return confirm('Apakah Anda yakin ingin menghapus voucher ini?');">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger btn-sm">Hapus</button>
+                            <button class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i> Hapus</button>
                         </form>
                     </td>
                 </tr>

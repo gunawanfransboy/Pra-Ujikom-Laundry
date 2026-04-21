@@ -34,7 +34,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th>No</th>
                     <th>Kode Order</th>
                     <th>Pelanggan</th>
                     <th>Tgl Order</th>

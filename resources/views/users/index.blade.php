@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('title', 'Manajemen User')
 @section('page-title', 'Manajemen User')
-
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+</head>
 @section('content')
 <div class="card">
     <div class="card-header">
@@ -28,7 +30,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th>No</th>
                     <th>Nama User</th>
                     <th>Email</th>
                     <th>Level</th>
@@ -62,14 +64,15 @@
                         <td>
                             <div style="display:flex;gap:6px;justify-content:center;">
                                 <a href="{{ route('users.edit', $u) }}" class="btn btn-info btn-sm">
-                                    Edit
+                                    <i class="bi bi-pencil-fill"></i> Edit
                                 </a>
                                 @if(auth()->id() !== $u->id)
                                 <form method="POST" action="{{ route('users.destroy', $u) }}"
                                     onsubmit="return confirm('Hapus user {{ $u->name }}?')">
                                     @csrf @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">
-                                        </button>
+                                        <i class="bi bi-trash-fill"></i> Hapus
+                                    </button>
                                 </form>
                                 @endif
                             </div>

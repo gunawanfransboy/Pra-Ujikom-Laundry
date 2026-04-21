@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('levels', function (Blueprint $table) {
-            $table->id();
-            $table->string('level_name', 50);
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::create('customers', function (Blueprint $col) {
+            $col->id();
+            $col->string('customer_name');
+            $col->string('phone')->nullable();
+            $col->text('address')->nullable();
+            $col->timestamps();
+            $col->softDeletes();
         });
     }
 
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('levels');
+        Schema::dropIfExists('customers');
     }
 };

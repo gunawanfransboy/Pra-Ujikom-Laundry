@@ -62,9 +62,11 @@
                                 </option>
                             @endforeach
                         </select>
+                        {{-- 
                         <div id="member-status-info" style="font-size:12px; color:#10b981; margin-top:4px; display:none;">
                             Pelanggan ini mendapatkan potongan Member Baru 5%
                         </div>
+                        --}}
                         @error('id_customer')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
 
@@ -129,6 +131,7 @@
                 <span style="color:#94a3b8;font-size:14px;">Subtotal</span>
                 <div id="subtotal-display" style="font-weight:600;">Rp 0</div>
             </div>
+            {{-- 
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
                 <span style="color:#94a3b8;font-size:14px;">Pajak (10%)</span>
                 <div id="tax-display" style="font-weight:600;">Rp 0</div>
@@ -152,6 +155,7 @@
                 <span style="color:#10b981;font-size:14px;">Diskon Voucher (<span id="vd-perc">0</span>%)</span>
                 <div id="voucher-discount-display" style="font-weight:600;color:#10b981;">- Rp 0</div>
             </div>
+            --}}
 
             <hr class="divider">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
@@ -346,6 +350,8 @@ function calcTotal() {
     });
 
     document.getElementById('subtotal-display').textContent = 'Rp ' + grand.toLocaleString('id-ID');
+    
+    /* 
     const tax = Math.round(grand * 0.10);
     document.getElementById('tax-display').textContent = 'Rp ' + tax.toLocaleString('id-ID');
 
@@ -371,8 +377,10 @@ function calcTotal() {
     } else {
         voucherDiscRow.style.display = 'none';
     }
-
     const finalTotal = baseTotal - discMemberAmt - discVoucherAmt;
+    */
+   
+    const finalTotal = grand;
     document.getElementById('total-display').textContent = 'Rp ' + finalTotal.toLocaleString('id-ID');
 
     const pay = parseInt(document.getElementById('order_pay').value) || 0;

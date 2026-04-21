@@ -59,6 +59,7 @@ class TransOrderController extends Controller
             $subtotalOrder += (int) round($service->price * ($svc['qty'] / 1000));
         }
 
+        /* 
         $tax = (int) round($subtotalOrder * 0.10);
         $baseTotal = $subtotalOrder + $tax;
 
@@ -82,6 +83,14 @@ class TransOrderController extends Controller
         }
 
         $totalFinal = $baseTotal - $discountMember - $discountVoucher;
+        */
+
+        // Simple calculation: total = subtotal
+        $tax = 0;
+        $discountMember = 0;
+        $discountVoucher = 0;
+        $idVoucher = null;
+        $totalFinal = $subtotalOrder;
         $orderPay    = $request->order_pay ?? 0;
         $orderChange = max(0, $orderPay - $totalFinal);
 
@@ -174,6 +183,7 @@ class TransOrderController extends Controller
         }
 
         $subtotalOrder = $total;
+        /*
         $tax = (int) round($subtotalOrder * 0.10);
         $total += $tax;
 
@@ -190,6 +200,13 @@ class TransOrderController extends Controller
         }
 
         $totalFinal = $baseTotal - $discountMember - $discountVoucher;
+        */
+
+        // Simple calculation: total = subtotal
+        $tax = 0;
+        $discountMember = 0;
+        $discountVoucher = 0;
+        $totalFinal = $subtotalOrder;
         $orderPay    = $request->order_pay ?? 0;
         $orderChange = max(0, $orderPay - $totalFinal);
 
